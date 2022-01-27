@@ -22,12 +22,12 @@ import java.util.List;
 @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON,})
 @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON,})
 @Api(value = "Video Games")
-public class VideoGameResource {
+public class FilmsDataBaseResource {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Autowired
-    public VideoGameResource(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+    public FilmsDataBaseResource(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 

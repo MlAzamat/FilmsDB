@@ -15,8 +15,8 @@ public class AppResourceConfig extends ResourceConfig {
 
     public AppResourceConfig() {
 
-        packages("in.techietester.resource", "in.techietester.app");
-        register(VideoGameResource.class);
+        packages("in.test-qa.resource", "in.test-qa.app");
+        register(FilmsDataBaseResource.class);
 
         configureSwagger();
     }
@@ -27,12 +27,12 @@ public class AppResourceConfig extends ResourceConfig {
         beanConfig.setVersion("1.0.0");
         beanConfig.setSchemes(new String[] { "http", "https" });
         beanConfig.setBasePath("/app");
-        beanConfig.setTitle("Video Game Database - Test Application");
-        beanConfig.setDescription("https://github.com/TechieTester/VideoGameDB");
+        beanConfig.setTitle("Films Data Base - Test Application");
+        beanConfig.setDescription("https://github.com/MlAzamat/FilmsDB");
         beanConfig.getSwagger().addConsumes(MediaType.APPLICATION_JSON);
         beanConfig.getSwagger().addProduces(MediaType.APPLICATION_JSON);
-        beanConfig.setContact("James Willett");
-        beanConfig.setResourcePackage("com.techietester.resource");
+        beanConfig.setContact("Azamat");
+        beanConfig.setResourcePackage("ru.test-qa.resource");
         beanConfig.setPrettyPrint(false);
         beanConfig.setScan();
     }
