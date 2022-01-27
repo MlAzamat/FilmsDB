@@ -1,4 +1,4 @@
-package ru.test-qa.model;
+package ru.testqa.model;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 @XmlRootElement
-public class VideoGame {
+public class Films {
 
     private int id;
     private String name;

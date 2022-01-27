@@ -1,6 +1,6 @@
-package ru.test-qa.resource;
+package ru.testqa.resource;
 
-import com.techietester.model.VideoGame;
+import ru.testqa.model.Films;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -15,13 +15,12 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-@Path("/videogames")
+@Path("/films")
 @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON,})
 @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON,})
-@Api(value = "Video Games")
+@Api(value = "Films Data Base")
 public class FilmsDataBaseResource {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -32,71 +31,71 @@ public class FilmsDataBaseResource {
     }
 
     @GET
-    @ApiOperation(value = "Get List of all Video Games", notes = "Returns all the videos games in the DB", response = VideoGame.class, responseContainer = "List")
-    public List<VideoGame> listVideoGames() {
+    @ApiOperation(value = "Get List of all Films", notes = "Returns all films from the Data Base", response = Films.class, responseContainer = "List")
+    public List<Films> ListFilms() {
 
-        String sql = "select * from VIDEOGAME";
+        String sql = "select * from film";
 
-        return namedParameterJdbcTemplate.query(sql, new VideoGameMapper());
+        return namedParameterJdbcTemplate.query(sql, new FilmsMapper());
     }
 
     @GET
-    @Path("/{videoGameId}")
-    @ApiOperation(value = "Get a single video game by ID", notes = "Returns the details of a single game by ID", response = VideoGame.class)
-    public VideoGame getVideoGame(
-            @ApiParam(value = "The video game ID", required = true) @PathParam("videoGameId") Integer videoGameId)
+    @Path("/{filmId}")
+    @ApiOperation(value = "Get a film by ID", notes = "Returns information about a film by ID", response = Films.class)
+    public Films getFilm(
+            @ApiParam(value = "The film ID", required = true) @PathParam("filmId") Integer filmId)
     {
-        String sql = "select * from VIDEOGAME where id=:videoGameId";
-        SqlParameterSource namedParameters = new MapSqlParameterSource("videoGameId", videoGameId);
-        return namedParameterJdbcTemplate.query(sql, namedParameters, new VideoGameMapper()).get(0);
+        String sql = "select * from film where id=:filmId";
+        SqlParameterSource namedParameters = new MapSqlParameterSource("filmId", filmId);
+        return namedParameterJdbcTemplate.query(sql, namedParameters, new FilmsMapper()).get(0);
     }
 
     @POST
-    @ApiOperation(value = "Add a new video game", notes = "Add a new video game to the DB")
-    public String createVideoGame(final VideoGame videoGame) {
-        String sql = "insert into VIDEOGAME values(:id, :name, :releaseDate, :reviewScore, :category, :rating)";
-        SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(videoGame);
+    @ApiOperation(value = "Add a new film", notes = "Add a new film into the DB")
+    public String createFilm(final Films film) {
+        String sql = "insert into film values(:id, :name, :releaseDate, :reviewScore, :category, :rating)";
+        SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(film);
         this.namedParameterJdbcTemplate.update(sql, namedParameters);
         return "{\"status\": \"Record Added Successfully\"}";
     }
 
     @PUT
-    @Path("/{videoGameId}")
-    @ApiOperation(value = "Update a video game", notes = "Update an existing video game in the DB by specifying a new body ", response = VideoGame.class)
-    public VideoGame editVideoGame(final VideoGame videoGame, @PathParam("videoGameId") Integer videoGameId ) {
-        String sql = "update VIDEOGAME set id=:id, name=:name, released_on=:releaseDate, review_score=:reviewScore, category=:category, rating=:rating where id=:id";
-        SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(videoGame);
+    @Path("/{filmId}")
+    @ApiOperation(value = "Update information about a film", notes = "Update an existing film in the DB ", response = Films.class)
+    public Films editFilm(final Films film, @PathParam("filmId") Integer filmId ) {
+        String sql = "update film set id=:id, name=:name, released_on=:releaseDate, review_score=:reviewScore, category=:category, rating=:rating where id=:id";
+        SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(film);
         this.namedParameterJdbcTemplate.update(sql, namedParameters);
 
-        sql = "select * from VIDEOGAME where id=:videoGameId";
-        SqlParameterSource namedParameters2 = new MapSqlParameterSource("videoGameId", videoGameId);
-        return namedParameterJdbcTemplate.query(sql, namedParameters2, new VideoGameMapper()).get(0);
+        sql = "select * from film where id=:filmId";
+        SqlParameterSource namedParameters2 = new MapSqlParameterSource("filmId", filmId);
+        return namedParameterJdbcTemplate.query(sql, namedParameters2, new FilmsMapper()).get(0);
     }
 
     @DELETE
-    @Path("/{videoGameId}")
-    @ApiOperation(value = "Delete a video game", notes = "Deletes a video game from the DB by ID")
-    public String deleteVideoGame(
-            @ApiParam(value = "The video game ID", required = true) @PathParam("videoGameId") Integer videoGameId)
+    @Path("/{filmId}")
+    @ApiOperation(value = "Delete a film", notes = "Deletes a film from the Data Base by ID")
+    public String deleteFilm(
+            @ApiParam(value = "The film ID", required = true) @PathParam("filmId") Integer filmId)
     {
-        String sql = "delete from VIDEOGAME where id =:videoGameId";
-        SqlParameterSource namedParameters = new MapSqlParameterSource("videoGameId", videoGameId);
+        String sql = "delete from film where id =:filmId";
+        SqlParameterSource namedParameters = new MapSqlParameterSource("filmId", filmId);
         this.namedParameterJdbcTemplate.update(sql, namedParameters);
-        return "{\"status\": \"Record Deleted Successfully\"}";
+        return "{\"status\": \"A film deleted successfully\"}";
     }
 
 
-    private static final class VideoGameMapper implements RowMapper<VideoGame> {
-        public VideoGame mapRow(ResultSet rs, int rowNum) throws SQLException {
+    private static final class FilmsMapper implements RowMapper<Films> {
+        public Films mapRow(ResultSet rs, int rowNum) throws SQLException {
 
-            VideoGame videoGame = new VideoGame();
-            videoGame.setId(rs.getInt("id"));
-            videoGame.setName(rs.getString("name"));
-            videoGame.setReleaseDate(rs.getDate("released_on"));
-            videoGame.setReviewScore(rs.getInt("review_score"));
-            videoGame.setCategory(rs.getString("category"));
-            videoGame.setRating(rs.getString("rating"));
-            return videoGame;
+            Films film = new Films();
+            film.setId(rs.getInt("id"));
+            film.setName(rs.getString("name"));
+            film.setReleaseDate(rs.getDate("released_on"));
+            film.setReviewScore(rs.getInt("review_score"));
+            film.setCategory(rs.getString("category"));
+            film.setRating(rs.getString("rating"));
+            return film;
         }
     }
 }

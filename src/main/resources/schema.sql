@@ -1,4 +1,4 @@
-CREATE TABLE VIDEOGAME
+CREATE TABLE FILM
 (ID INT PRIMARY KEY,
 	NAME VARCHAR(100) DEFAULT '',
 	RELEASED_ON DATETIME,
@@ -7,16 +7,16 @@ CREATE TABLE VIDEOGAME
 	RATING VARCHAR(100));
 
 
-insert into VIDEOGAME values (1, 'Resident Evil 4', '2005-10-01 23:59:59', 85, 'Shooter', 'Universal');
-insert into VIDEOGAME values (2, 'Gran Turismo 3', '2001-03-10 23:59:59', 91, 'Driving', 'Universal');
-insert into VIDEOGAME values (3, 'Tetris', '1984-06-25 23:59:59', 88, 'Puzzle', 'Universal');
-insert into VIDEOGAME values (4, 'Super Mario 64', '1996-10-20 23:59:59', 90, 'Platform', 'Universal');
-insert into VIDEOGAME values (5, 'The Legend of Zelda: Ocarina of Time', '1998-12-10 23:59:59', 93, 'Adventure', 'PG-13');
-insert into VIDEOGAME values (6, 'Doom', '1993-02-18 23:59:59', 81, 'Shooter', 'Mature');
-insert into VIDEOGAME values (7, 'Minecraft', '2011-12-05 23:59:59', 77, 'Puzzle', 'Universal');
-insert into VIDEOGAME values (8, 'SimCity 2000', '1994-09-11 23:59:59', 88, 'Strategy', 'Universal');
-insert into VIDEOGAME values (9, 'Final Fantasy VII', '1997-08-20 23:59:59', 97, 'RPG', 'PG-13');
-insert into VIDEOGAME values (10, 'Grand Theft Auto III', '2001-04-23 23:59:59', 90, 'Driving', 'Mature');
+insert into FILM values (1, 'Terminator 4', '2018-10-10 23:59:59', 85, 'Fantastic', '4.4');
+insert into FILM values (2, 'Stars of war 3', '2009-10-10 23:59:59', 91, 'Action', '4.6');
+insert into FILM values (3, 'World War', '2010-10-10 23:59:59', 88, 'Action', '4.0');
+insert into FILM values (4, 'Terminator 2', '2010-10-10 23:59:59', 90, 'Fantastic', '5.0');
+insert into FILM values (5, 'I am Legend', '2050-10-10 23:59:59', 93, 'Fantastic', '4.5');
+insert into FILM values (6, 'Max', '2001-10-10 23:59:59', 81, 'Action', '4.2');
+insert into FILM values (7, 'Two and halh mans', '2011-10-10 23:59:59', 77, 'Comedy', '4.8');
+insert into FILM values (8, 'Start', '2000-10-10 23:59:59', 88, 'Action', '4.6');
+insert into FILM values (9, 'Dogs oposite cats VII', '2005-10-10 23:59:59', 97, 'Action', '4.3');
+insert into FILM values (10, 'Mars', '2010-10-10 23:59:59', 90, 'Fantastic', '4.9');
 
 
 
